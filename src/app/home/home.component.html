@@ -1,0 +1,17 @@
+<section class="home-container">
+  <section class="products">
+    <h2>Termékeink</h2>
+    <div class="product-container">
+      <app-product-card *ngFor="let product of products"
+                        [image]="product.image"
+                        [name]="product.name"
+                        [price]="product.price">
+      </app-product-card>
+    </div>
+  </section>
+
+  <app-menu (selectedPage)="changePage($event)"></app-menu>
+  <ng-template [ngIf]="page === 'add-product' ">
+    <app-add-product></app-add-product>
+  </ng-template>
+</section>

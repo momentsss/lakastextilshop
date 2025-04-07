@@ -1,0 +1,70 @@
+.login-container {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+
+  h2 {
+    color: #fff;
+    background: linear-gradient(135deg, #4a90e2, #9013fe);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+  }
+
+  .input-group {
+    margin: 15px 0;
+    text-align: center;
+    width: 100%;
+
+    label {
+      display: block;
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+      background: rgba(0, 0, 0, 0.3); 
+      color: #fff;
+      outline: none;
+      transition: border-color 0.3s ease;
+      text-align: center;
+    }
+
+    input:focus {
+      border-color: #4a90e2;
+    }
+  }
+
+  .cta-button {
+    padding: 10px;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: #ff2d2d;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

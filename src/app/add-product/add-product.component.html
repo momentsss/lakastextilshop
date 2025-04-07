@@ -1,0 +1,34 @@
+<h2>Új termék hozzáadása</h2>
+<form class="add-product-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>Termék neve</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>Termék ára</mat-label>
+      <input matInput type="number" formControlName="price">
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>Termék leírása</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group file-upload">
+    <label for="product-image">Termék képe </label>
+    <input type="file" id="product-image" (change)="onFileSelected($event)" accept="image/*">
+  </div>
+
+  <div class="form-group">
+    <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+      Termék hozzáadása ({{ productForm.invalid ? 'Nem jó' : 'OK' }})
+    </button>
+  </div>
+</form>

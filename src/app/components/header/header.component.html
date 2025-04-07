@@ -1,0 +1,12 @@
+<header>
+  <nav>
+    <span routerLink="/" class="home-link">{{ title }}</span>
+    <mat-icon class="menu-icon" (click)="toggleMenu()">menu</mat-icon>
+    <ul [class.active]="menuOpen()">
+      <li routerLink="/myprof">Profilom</li>
+      <li routerLink="/register">Regisztráció</li>
+      <li routerLink="/signin">Bejelentkezés</li>
+      <li routerLink="/kosar">Kosaram</li>
+    </ul>
+  </nav>
+</header>
