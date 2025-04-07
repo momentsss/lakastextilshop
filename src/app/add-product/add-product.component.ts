@@ -4,6 +4,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { addDoc, collection, Firestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp } from '@angular/fire/app';
+import { environment } from '../../environments/environment.prod';
+
+
 
 @Component({
   selector: 'app-add-product',
@@ -39,4 +44,8 @@ export class AddProductComponent {
       this.productForm.patchValue({ image: file });
     }
   }
+
+  private app = initializeApp(environment);
+  private firestore: Firestore = getFirestore(this.app);
 }
+
