@@ -11,7 +11,7 @@ export const routes: Routes = [{
 {
     path:'myprof',
     loadComponent: () => {
-        return import('./myprof/myprof.component').then((m) =>m.MyprofComponent)
+        return import('./myprof/myprof.component').then((m) =>m.MyProfComponent)
     },
 },
 {

@@ -7,4 +7,5 @@ export interface UserData {
     postNumber: number;
     city: string;
     address: string;
-}
+  }
+  

@@ -1,0 +1,124 @@
+.profile-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.profile-card {
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #fafafa;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px;
+  position: relative;
+}
+
+mat-card-title {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+mat-card-subtitle {
+  color: #666;
+}
+
+.edit-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.edit-buttons button {
+  transition: transform 0.3s ease, background-color 0.3s;
+}
+
+.edit-buttons button:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+mat-slide-toggle {
+  margin-top: 20px;
+}
+
+.address-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 600px) {
+  .address-row {
+    flex-direction: row;
+  }
+}
+
+.zip-code, .city {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #666;
+}
+
+mat-form-field.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+mat-form-field.mat-form-field-appearance-fill.mat-focused .mat-form-field-flex {
+  background-color: #e0f7fa;
+  border: 1px solid #26a69a;
+}
+
+.mat-select-value {
+  color: #333;
+}
+
+.mat-select-arrow {
+  color: #757575;
+}
+
+.profile-details-list mat-list-item {
+  display: block;
+  padding: 10px 0;
+}
+
+.country-item, .address-item {
+  flex-direction: column;
+}
