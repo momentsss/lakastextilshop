@@ -1,27 +1,41 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Name:</label>
-    <input type="text" formControlName="name">
-    <small *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
-      Name is required (min 3 characters).
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="register-form">
+  <h2 class="form-title">Regisztráció</h2>
+  
+  <div class="form-group">
+    <label for="name">Név</label>
+    <div class="input-container">
+      <i class="input-icon fas fa-user"></i>
+      <input id="name" type="text" formControlName="name" placeholder="Add meg a neved">
+    </div>
+    <small *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="error-message">
+      A név megadása kötelező (minimum 3 karakter).
     </small>
   </div>
 
-  <div>
-    <label>Email:</label>
-    <input type="email" formControlName="email">
-    <small *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
-      Please enter a valid email.
+  <div class="form-group">
+    <label for="email">Email</label>
+    <div class="input-container">
+      <i class="input-icon fas fa-envelope"></i>
+      <input id="email" type="email" formControlName="email" placeholder="pelda@email.hu">
+    </div>
+    <small *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error-message">
+      Kérjük, adj meg egy érvényes email címet.
     </small>
   </div>
 
-  <div>
-    <label>Password:</label>
-    <input type="password" formControlName="password">
-    <small *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
-      Password must be at least 6 characters long.
+  <div class="form-group">
+    <label for="password">Jelszó</label>
+    <div class="input-container">
+      <i class="input-icon fas fa-lock"></i>
+      <input id="password" type="password" formControlName="password" placeholder="Jelszó">
+    </div>
+    <small *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="error-message">
+      A jelszónak legalább 6 karakter hosszúnak kell lennie.
     </small>
   </div>
 
-  <button type="submit" [disabled]="userForm.invalid">Register</button>
+  <button type="submit" [disabled]="userForm.invalid" class="submit-button">
+    <span>Regisztráció</span>
+    <i class="fas fa-arrow-right"></i>
+  </button>
 </form>

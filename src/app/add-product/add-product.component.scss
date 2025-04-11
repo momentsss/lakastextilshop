@@ -1,68 +1,160 @@
+$primary: #3e7bfa;
+$primary-dark: #2967e0;
+$text: #333;
+$border: #e0e6f5;
+$shadow: rgba(62, 123, 250, 0.15);
+$white: #fff;
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 1.8rem;
+    color: $text;
+    font-weight: 600;
+    margin: 0 0 15px;
+    position: relative;
+    display: inline-block;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: $primary;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
 .add-product-form {
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 25px;
+  background-color: $white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px $shadow;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .form-group {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-  }
-  
-  .add-product-form mat-form-field {
-    width: 100%;
-  
-    .mat-input-element {
-      color: black !important;
-      caret-color: black;
-      font-size: 16px;
-      background-color: rgba(0, 0, 0, 0.05); 
+
+    label {
+      font-weight: 500;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
     }
-  
-    .mat-input-element::placeholder {
-      color: rgba(0, 0, 0, 0.6);
-      opacity: 1;
-    }
-  
-    &.mat-focused .mat-form-field-label {
-      color: #1976d2;
-    }
-  
-    .mat-form-field-underline {
-      background-color: rgba(0, 0, 0, 0.42);
-    }
-  
-    &.mat-focused {
-      .mat-form-field-label { 
-        color: #1976d2;
-      }
-      .mat-form-field-ripple {
-        background-color: #1976d2;
-      }
-    }
-  }
-  
-  h0, h1, h2 {
-    color: black !important; 
   }
 
-  input, textarea {
-    color: black !important;
-  }
-  
-  .add-product-form button {
+  button {
     width: 100%;
     padding: 12px;
-    font-size: 1.1rem;
-    background-color: #1976d2;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: $primary;
+    color: $white;
+    border-radius: 6px;
     border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: $primary-dark;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba($primary, 0.25);
+    }
+
+    &:disabled {
+      background-color: rgba($primary, 0.6);
+      cursor: not-allowed;
+    }
   }
-  
-  .add-product-form button:hover {
-    background-color: #1565c0;
+}
+
+mat-form-field {
+  width: 100%;
+
+  .mat-form-field-wrapper,
+  .mat-form-field-flex {
+    margin: 0;
+    padding: 0;
   }
+
+  .mat-input-element {
+    color: $text !important;
+    caret-color: $primary;
+    font-size: 15px;
+  }
+
+  &.mat-focused .mat-form-field-label {
+    color: $primary;
+  }
+}
+
+input,
+textarea {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+textarea {
+  min-height: 100px;
+  max-height: 200px;
+  resize: vertical;
+}
+
+.file-upload {
+  margin: 5px 0;
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  input[type='file'] {
+    width: 100%;
+    padding: 8px;
+    border: 1px dashed $border;
+    border-radius: 6px;
+    background-color: rgba($primary, 0.03);
+    transition: border-color 0.2s ease-in-out;
+
+    &:hover {
+      border-color: rgba($primary, 0.5);
+    }
+  }
+
+  .image-preview {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid $border;
+  }
+}
+
+@media (max-width: 600px) {
+  .add-product-form {
+    padding: 15px;
+  }
+}

@@ -12,6 +12,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { UserData } from '../model/userData.model';
+import { UserService } from '../services/myprof.service';
 
 @Component({
   selector: 'app-myprof',
@@ -33,32 +34,22 @@ import { UserData } from '../model/userData.model';
   styleUrls: ['./myprof.component.scss']
 })
 export class MyProfComponent implements OnInit {
-onCountryChange() {
-throw new Error('Method not implemented.');
-}
-  user!: UserData; 
+  user!: UserData;
   profileForm!: FormGroup;
   isEditing = false;
+  countries = ['Magyarország', 'Románia', 'Szlovákia', 'Ausztria'];
 
-  countries = ['Magyarország', 'Románia', 'Szlovákia', 'Ausztria']; 
-showBlur: any;
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.loadUser(); 
+    this.loadUser();
   }
 
   loadUser(): void {
-    this.user = {
-      userId: 'abc123',
-      name: 'Teszt Elek',
-      mobile: 123456789,
-      country: 'Magyarország',
-      postNumber: 1234,
-      city: 'Szeged',
-      address: 'Teszt utca 5.'
-    };
+    this.user = this.userService.getUser();
 
     this.profileForm = this.fb.group({
       name: [this.user.name, [Validators.required, Validators.minLength(3)]],
@@ -66,8 +57,19 @@ showBlur: any;
       country: [this.user.country, Validators.required],
       postNumber: [this.user.postNumber, [Validators.required, Validators.pattern('^[0-9]+$')]],
       city: [this.user.city, Validators.required],
-      address: [this.user.address, Validators.required],
-      newsletter: [false]
+      address: [this.user.address, Validators.required]
+    });
+
+    this.profileForm.get('country')?.valueChanges.subscribe(value => {
+      console.log('Ország változott:', value);
+    });
+
+    this.profileForm.get('postNumber')?.valueChanges.subscribe(value => {
+      console.log('Irányítószám változott:', value);
+    });
+
+    this.profileForm.get('city')?.valueChanges.subscribe(value => {
+      console.log('Város változott:', value);
     });
   }
 
@@ -81,9 +83,13 @@ showBlur: any;
         ...this.user,
         ...this.profileForm.value,
       };
-      console.log('Mentett adatok:', updatedUser);
+      this.userService.updateUser(updatedUser);
       this.user = updatedUser;
       this.toggleEdit();
     }
+  }
+
+  onCountryChange(newCountry: string) {
+    console.log('Ország új értéke:', newCountry);
   }
 }

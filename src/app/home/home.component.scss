@@ -45,7 +45,6 @@ h2 {
     animation: backgroundChange 30s ease infinite, moveText 5s ease-in-out infinite;
 }
 
-// A termékek konténerének stílusai
 .product-container {
     display: flex;
     justify-content: center;
@@ -54,7 +53,6 @@ h2 {
     padding: 20px;
 }
 
-// Termék kártyák stílusai
 .product-card {
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
@@ -113,7 +111,6 @@ h2 {
     background-color: #ff2d2d;
 }
 
-// Media queries a mobil nézethez
 @media screen and (max-width: 768px) {
     h2 {
         font-size: 1.5rem;
@@ -126,7 +123,7 @@ h2 {
     }
 
     .product-card {
-        width: 180px; // Mobilon kisebb kártyák
+        width: 180px; 
         height: 300px;
     }
 
@@ -144,7 +141,6 @@ h2 {
     }
 }
 
-// Nagyon kis képernyők esetén
 @media screen and (max-width: 480px) {
     h2 {
         font-size: 1.25rem;

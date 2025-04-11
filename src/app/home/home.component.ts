@@ -5,6 +5,7 @@ import { MenuComponent } from "../shared/menu/menu.component";
 import { AddProductComponent } from "../add-product/add-product.component";
 import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { CommonModule } from '@angular/common'; 
+import { Product } from '../model/product-model';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   page = '';
-  products: any[] = []; 
+  products: Product[] = []; 
 
   constructor(private router: Router, private productService: ProductService) {}
 

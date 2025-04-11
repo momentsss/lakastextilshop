@@ -1,4 +1,7 @@
-<h2>Új termék hozzáadása</h2>
+<div class="page-header">
+  <h2>Új termék hozzáadása</h2>
+</div>
+
 <form class="add-product-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <mat-form-field appearance="outline">
@@ -22,13 +25,13 @@
   </div>
 
   <div class="form-group file-upload">
-    <label for="product-image">Termék képe </label>
+    <label for="product-image">Termék képe</label>
     <input type="file" id="product-image" (change)="onFileSelected($event)" accept="image/*">
   </div>
 
   <div class="form-group">
     <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
-      Termék hozzáadása ({{ productForm.invalid ? 'Nem jó' : 'OK' }})
+      Termék hozzáadása
     </button>
   </div>
 </form>
