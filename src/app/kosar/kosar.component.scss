@@ -1,0 +1,344 @@
+.cart-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cart-header {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 16px 16px 0 0;
+  
+  h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    
+    mat-icon {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+}
+
+.cart-content {
+  padding: 0;
+}
+
+.cart-list {
+  padding: 1.5rem 2rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: #f0f4f8;
+  }
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e3c72;
+    }
+  }
+  
+  .remove-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    background-color: #f44336;
+    color: white;
+    
+    &:hover {
+      background-color: #d32f2f;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+    }
+    
+    mat-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.cart-summary {
+  background-color: #f8f9fa;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #eaeaea;
+  
+  .total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed #ddd;
+    
+    .total-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #555;
+    }
+    
+    .total-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e3c72;
+    }
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .continue-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: #7986cb;
+    color: white;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #5c6bc0;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(121, 134, 203, 0.4);
+    }
+    
+    mat-icon {
+      font-size: 1.2rem;
+    }
+  }
+  
+  .purchase-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+    }
+    
+    mat-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  
+  mat-icon {
+    font-size: 4rem;
+    height: 4rem;
+    width: 4rem;
+    color: #adb5bd;
+    margin-bottom: 1.5rem;
+  }
+  
+  p {
+    font-size: 1.3rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+  }
+  
+  .shop-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+    }
+    
+    mat-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Gomb kiemelések
+button {
+  &.mat-raised-button {
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    
+    &:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+// Responsive design
+@media screen and (max-width: 768px) {
+  .cart-container {
+    margin: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .cart-header {
+    padding: 1.2rem 1.5rem;
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .cart-list, .cart-summary {
+    padding: 1.2rem 1.5rem;
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    
+    .item-info {
+      text-align: center;
+    }
+    
+    .remove-btn {
+      width: 100%;
+    }
+  }
+  
+  .cart-summary {
+    .total-section {
+      .total-label, .total-price {
+        font-size: 1.2rem;
+      }
+    }
+    
+    .button-group {
+      flex-direction: column;
+      gap: 1rem;
+      
+      .continue-btn, .purchase-btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Tablet nézet optimalizálás
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .cart-container {
+    max-width: 90%;
+  }
+  
+  .cart-summary {
+    .button-group {
+      .continue-btn, .purchase-btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

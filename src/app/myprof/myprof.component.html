@@ -1,102 +1,67 @@
 <div class="profile-container">
-  <mat-card *ngIf="user" class="profile-card">
+  <mat-card *ngIf="userProfile" class="profile-card">
     <mat-card-header>
-      <mat-card-title>Profilom</mat-card-title>
-      <mat-card-subtitle>{{ user.name }}</mat-card-subtitle>
-
-      <div class="edit-buttons">
-        <button mat-icon-button color="primary" (click)="toggleEdit()" *ngIf="!isEditing" aria-label="Profil szerkesztése">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="toggleEdit()" *ngIf="isEditing" aria-label="Szerkesztés megszakítása">
-          <mat-icon>cancel</mat-icon>
-        </button>
+      <div mat-card-avatar class="profile-avatar">
+        <mat-icon>person</mat-icon>
       </div>
+      <mat-card-title>Profilom</mat-card-title>
+      <mat-card-subtitle>{{ userProfile.email }}</mat-card-subtitle>
     </mat-card-header>
+
+    <mat-divider></mat-divider>
 
     <mat-card-content>
       <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-        <mat-list *ngIf="!isEditing" class="profile-details-list">
-          <mat-list-item>
-            <div matLine>
-              <mat-icon matListIcon>person</mat-icon>
-              <strong>Név:</strong> {{ user.name }}
-            </div>
-          </mat-list-item>
-
-          <mat-list-item>
-            <div matLine>
-              <mat-icon matListIcon>phone</mat-icon>
-              <strong>Mobil:</strong> {{ user.mobile }}
-            </div>
-          </mat-list-item>
-
-          <mat-list-item>
-            <div matLine>
-              <mat-icon matListIcon>home</mat-icon>
-              <strong>Cím:</strong> {{ user.postNumber }} {{ user.city }}, {{ user.country }} – {{ user.address }}
-            </div>
-          </mat-list-item>
-        </mat-list>
-
-        <div *ngIf="isEditing" class="edit-form">
-          <mat-form-field appearance="fill">
-            <mat-label>Név</mat-label>
-            <input matInput formControlName="name" required>
-            <mat-error *ngIf="profileForm.get('name')?.hasError('required')">A név megadása kötelező.</mat-error>
-            <mat-error *ngIf="profileForm.get('name')?.hasError('minlength')">Minimum 3 karakter szükséges.</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Mobiltelefonszám</mat-label>
-            <input matInput type="tel" formControlName="mobile" required>
-            <mat-error *ngIf="profileForm.get('mobile')?.hasError('required')">Kötelező megadni.</mat-error>
-            <mat-error *ngIf="profileForm.get('mobile')?.hasError('pattern')">Csak számokat adj meg.</mat-error>
-          </mat-form-field>
-
-          <h3>Szállítási cím</h3>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Ország</mat-label>
-            <mat-select formControlName="country" required>
-              <mat-option *ngFor="let country of countries" [value]="country">
-                {{ country }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="profileForm.get('country')?.hasError('required')">Az ország kiválasztása kötelező.</mat-error>
-          </mat-form-field>
-
-          <div class="address-row">
-            <mat-form-field appearance="fill" class="zip-code">
-              <mat-label>Irányítószám</mat-label>
-              <input matInput formControlName="postNumber" required>
-              <mat-error *ngIf="profileForm.get('postNumber')?.hasError('required')">Kötelező.</mat-error>
-              <mat-error *ngIf="profileForm.get('postNumber')?.hasError('pattern')">Csak szám.</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" class="city">
-              <mat-label>Város</mat-label>
-              <input matInput formControlName="city" required>
-              <mat-error *ngIf="profileForm.get('city')?.hasError('required')">A város megadása kötelező.</mat-error>
-            </mat-form-field>
+        <div *ngIf="!isEditing" class="profile-details">
+          <div class="profile-item">
+            <mat-icon class="profile-icon">badge</mat-icon>
+            <span><strong>Név:</strong> {{ userProfile.name }}</span>
           </div>
-
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Utca, házszám</mat-label>
-            <input matInput formControlName="address" required>
-            <mat-error *ngIf="profileForm.get('address')?.hasError('required')">A cím megadása kötelező.</mat-error>
-          </mat-form-field>
-          
+          <div class="profile-item">
+            <mat-icon class="profile-icon">email</mat-icon>
+            <span><strong>Email:</strong> {{ userProfile.email }}</span>
+          </div>
+          <div class="button-container">
+            <button mat-raised-button color="primary" (click)="toggleEdit()" class="edit-button">
+              <mat-icon>edit</mat-icon>
+              Szerkesztés
+            </button>
+          </div>
         </div>
 
-        <mat-card-actions align="end" *ngIf="isEditing">
-          <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">
-            <mat-icon>save</mat-icon> Mentés
-          </button>
-        </mat-card-actions>
+        <div *ngIf="isEditing" class="edit-form">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Név</mat-label>
+            <input matInput formControlName="name">
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" class="action-button save-button">
+              <mat-icon>save</mat-icon>
+              Mentés
+            </button>
+            <button mat-stroked-button color="warn" (click)="toggleEdit()" class="action-button cancel-button">
+              <mat-icon>cancel</mat-icon>
+              Mégse
+            </button>
+          </div>
+        </div>
       </form>
     </mat-card-content>
-  </mat-card>
 
-  <div *ngIf="!user" class="loading-message">Profiladatok betöltése...</div>
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <h3>Úton lévő termékek:</h3>
+      <ul *ngIf="inTransitItems.length > 0; else noItems">
+        <li *ngFor="let item of inTransitItems">
+          <strong>{{ item.name }}</strong> - {{ item.price }} Ft
+        </li>
+      </ul>
+      <ng-template #noItems>
+        <p>Nincsenek úton lévő termékek.</p>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
 </div>

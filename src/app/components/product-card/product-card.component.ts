@@ -12,4 +12,6 @@ export class ProductCardComponent {
   name!: string;
   @Input()
   price!: string;
+  @Input()
+  size?: string;
 }

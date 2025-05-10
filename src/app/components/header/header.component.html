@@ -1,12 +1,27 @@
-<header>
+<header class="modern-header">
   <nav>
-    <span routerLink="/" class="home-link">{{ title }}</span>
-    <mat-icon class="menu-icon" (click)="toggleMenu()">menu</mat-icon>
-    <ul [class.active]="menuOpen()">
-      <li routerLink="/myprof">Profilom</li>
-      <li routerLink="/register">Regisztráció</li>
-      <li routerLink="/signin">Bejelentkezés</li>
-      <li routerLink="/kosar">Kosaram</li>
-    </ul>
+    <div class="nav-container">
+      <div class="brand-container">
+        <span routerLink="/home" class="home-link">{{ title }}</span>
+      </div>
+      
+      <div class="menu-container">
+        <mat-icon class="menu-icon" (click)="toggleMenu()">menu</mat-icon>
+        <ul [class.active]="menuOpen()">
+          <li routerLink="/myprof">
+            <mat-icon>person</mat-icon>
+            <span>Profilom</span>
+          </li>
+          <li routerLink="/kosar" [ngClass]="{ 'highlight': cartHasItems }">
+            <mat-icon>shopping_cart</mat-icon>
+            <span>Kosaram</span>
+          </li>
+          <li (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Kijelentkezés</span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </header>

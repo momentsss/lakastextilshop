@@ -1,26 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
+import { Observable, from } from 'rxjs';
 import { UserData } from '../model/userData.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  constructor(private firestore: Firestore) {}
 
-  constructor() { }
-
-  getUser(): UserData {
-    return {
-      userId: 'abc123',
-      name: 'Teszt Elek',
-      mobile: 123456789,
-      country: 'Magyarország',
-      postNumber: 1234,
-      city: 'Szeged',
-      address: 'Teszt utca 5.'
-    };
+  getUser(userId: string): Observable<UserData> {
+    const userDocRef = doc(this.firestore, `users/${userId}`);
+    return docData(userDocRef) as Observable<UserData>;
   }
 
-  updateUser(user: UserData): void {
-    console.log('Mentett adatok:', user);
+  updateUser(user: UserData): Observable<void> {
+    const userDocRef = doc(this.firestore, `users/${user.userId}`);
+    return from(setDoc(userDocRef, user));
   }
 }

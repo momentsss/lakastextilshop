@@ -1,1 +1,53 @@
-<p>kosar works!</p>
+<section class="cart-container">
+  <div class="cart-header">
+    <h2>
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Kosár</span>
+    </h2>
+  </div>
+  
+  <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-content">
+    <div class="cart-list">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <div class="item-info">
+          <h3>{{ item.name }}</h3>
+          <span class="price">{{ item.price }} Ft</span>
+        </div>
+        <button mat-raised-button color="warn" (click)="removeFromCart(item.id)" class="remove-btn">
+          <mat-icon>remove_shopping_cart</mat-icon> 
+          <span>Eltávolítás</span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="cart-summary">
+      <div class="total-section">
+        <span class="total-label">Összesen:</span>
+        <span class="total-price">{{ totalPrice | number }} Ft</span>
+      </div>
+      
+      <div class="button-group">
+        <button mat-raised-button color="accent" routerLink="/home" class="continue-btn">
+          <mat-icon>arrow_back</mat-icon> 
+          <span>Vásárlás folytatása</span>
+        </button>
+        
+        <button mat-raised-button color="primary" (click)="purchase()" class="purchase-btn">
+          <mat-icon>shopping_bag</mat-icon> 
+          <span>Rendelés leadása</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <mat-icon>remove_shopping_cart</mat-icon>
+      <p>A kosár jelenleg üres.</p>
+      <button mat-raised-button color="primary" routerLink="/home" class="shop-btn">
+        <mat-icon>storefront</mat-icon>
+        <span>Vásárlás megkezdése</span>
+      </button>
+    </div>
+  </ng-template>
+</section>

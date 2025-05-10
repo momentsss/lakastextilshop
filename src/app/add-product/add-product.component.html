@@ -1,37 +1,56 @@
-<div class="page-header">
-  <h2>Új termék hozzáadása</h2>
-</div>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="add-product-form">
+  <h2 class="form-title">Új termék hozzáadása</h2>
 
-<form class="add-product-form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <mat-form-field appearance="outline">
+  <div class="progress-bar" [ngStyle]="{'width': calculateCompletionPercentage() + '%'}"></div>
+
+  <div class="form-fields">
+    <mat-form-field appearance="outline" class="animate-field">
       <mat-label>Termék neve</mat-label>
-      <input matInput formControlName="name">
+      <input matInput formControlName="name" placeholder="Add meg a termék nevét">
+      <mat-icon matSuffix>shopping_bag</mat-icon>
+      <mat-error *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+        A termék neve kötelező.
+      </mat-error>
     </mat-form-field>
-  </div>
 
-  <div class="form-group">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="animate-field">
       <mat-label>Termék ára</mat-label>
-      <input matInput type="number" formControlName="price">
+      <input matInput type="number" formControlName="price" placeholder="Add meg a termék árát">
+      <mat-icon matPrefix>monetization_on</mat-icon>
+      <span matSuffix>Ft</span>
+      <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
+        Az ár kötelező, és legalább 1 Ft-nak kell lennie.
+      </mat-error>
     </mat-form-field>
-  </div>
 
-  <div class="form-group">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="animate-field">
       <mat-label>Termék leírása</mat-label>
-      <textarea matInput formControlName="description"></textarea>
+      <textarea matInput formControlName="description" placeholder="Add meg a termék leírását"></textarea>
+      <mat-icon matSuffix>description</mat-icon>
+      <mat-hint align="end">{{productForm.get('description')?.value?.length || 0}}/500 karakter</mat-hint>
+      <mat-error *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+        A leírás kötelező.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="animate-field">
+      <mat-label>Méretek</mat-label>
+      <input matInput formControlName="size" placeholder="Add meg a termék méreteit (pl. 123123)">
+      <mat-icon matSuffix>straighten</mat-icon>
+      <mat-error *ngIf="productForm.get('size')?.invalid && productForm.get('size')?.touched">
+        A méret csak számokat tartalmazhat.
+      </mat-error>
     </mat-form-field>
   </div>
 
-  <div class="form-group file-upload">
-    <label for="product-image">Termék képe</label>
-    <input type="file" id="product-image" (change)="onFileSelected($event)" accept="image/*">
-  </div>
-
-  <div class="form-group">
-    <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
-      Termék hozzáadása
+  <!-- Buttons -->
+  <div class="button-container">
+    <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid" class="action-button add-button pulse-effect" aria-label="Termék hozzáadása">
+      <mat-icon>add_circle</mat-icon> Hozzáadás
+      <span class="button-glow"></span>
+    </button>
+    <button mat-raised-button color="accent" type="button" (click)="goBack()" class="action-button back-button" aria-label="Vissza a főoldalra">
+      <mat-icon>arrow_back</mat-icon> Vissza
     </button>
   </div>
 </form>

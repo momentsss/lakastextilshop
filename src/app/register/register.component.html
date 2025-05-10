@@ -1,12 +1,13 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="register-form">
+<div *ngIf="loading" class="loading-overlay">
+  <p>Betöltés...</p>
+</div>
+
+<form *ngIf="!loading" [formGroup]="userForm" (ngSubmit)="onSubmit()" class="register-form">
   <h2 class="form-title">Regisztráció</h2>
-  
+
   <div class="form-group">
     <label for="name">Név</label>
-    <div class="input-container">
-      <i class="input-icon fas fa-user"></i>
-      <input id="name" type="text" formControlName="name" placeholder="Add meg a neved">
-    </div>
+    <input id="name" type="text" formControlName="name" placeholder="Add meg a neved">
     <small *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="error-message">
       A név megadása kötelező (minimum 3 karakter).
     </small>
@@ -14,10 +15,7 @@
 
   <div class="form-group">
     <label for="email">Email</label>
-    <div class="input-container">
-      <i class="input-icon fas fa-envelope"></i>
-      <input id="email" type="email" formControlName="email" placeholder="pelda@email.hu">
-    </div>
+    <input id="email" type="email" formControlName="email" placeholder="pelda@email.hu">
     <small *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error-message">
       Kérjük, adj meg egy érvényes email címet.
     </small>
@@ -25,17 +23,13 @@
 
   <div class="form-group">
     <label for="password">Jelszó</label>
-    <div class="input-container">
-      <i class="input-icon fas fa-lock"></i>
-      <input id="password" type="password" formControlName="password" placeholder="Jelszó">
-    </div>
+    <input id="password" type="password" formControlName="password" placeholder="Jelszó">
     <small *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="error-message">
       A jelszónak legalább 6 karakter hosszúnak kell lennie.
     </small>
   </div>
 
   <button type="submit" [disabled]="userForm.invalid" class="submit-button">
-    <span>Regisztráció</span>
-    <i class="fas fa-arrow-right"></i>
+    Regisztráció
   </button>
 </form>

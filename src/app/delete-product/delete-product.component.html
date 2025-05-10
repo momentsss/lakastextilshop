@@ -1,0 +1,47 @@
+<section class="delete-container">
+  <h2>Termékek törlése</h2>
+
+  <div *ngIf="products.length > 0; else noProducts" class="product-list">
+    <div *ngFor="let product of products" class="product-card-container">
+      <mat-card-header>
+        <div class="product-name">
+          <span class="label">Termék neve</span>
+          <span class="product-name-text">{{ product.name }}</span>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <dl class="product-specs">
+          <div class="spec-row">
+            <dt>Ár</dt>
+            <dd>{{ product.price }} Ft</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Leírás</dt>
+            <dd>{{ product.description }}</dd>
+          </div>
+          <div class="spec-row">
+            <dt>Méretek</dt>
+            <dd>{{ product.size }}</dd>
+          </div>
+        </dl>
+      </mat-card-content>
+      <mat-card-actions class="button-container">
+        <button mat-raised-button color="warn" class="cta-button" (click)="deleteProduct(product.id)">
+          <mat-icon>delete</mat-icon>
+          Törlés
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>
+
+  <ng-template #noProducts>
+    <p class="no-products-message">Nincsenek termékek az adatbázisban.</p>
+  </ng-template>
+
+  <div class="fixed-back-button-container">
+    <button mat-raised-button color="primary" class="fixed-back-button" type="button" (click)="goBack()">
+      Vissza a főoldalra
+    </button>
+  </div>
+
+</section>

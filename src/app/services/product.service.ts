@@ -1,23 +1,33 @@
-// app/services/product.service.ts
 import { Injectable } from '@angular/core';
-import { Product } from '../model/product-model'; 
+import { Firestore, collection, addDoc, getDocs, deleteDoc, doc } from '@angular/fire/firestore';
+import { Product } from '../model/product-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
-  private products: Product[] = [ 
-    { image: 'product1.jpg', name: 'Puha párna', price: '4,990 Ft' },
-    { image: 'product2.jpg', name: 'Színes függöny', price: '7,500 Ft' },
-    { image: 'product3.jpg', name: 'Modern ágytakaró', price: '10,990 Ft' },
-    { image: 'product4.jpg', name: 'Paplan', price: '9,999 Ft' },
-    { image: 'product5.jpg', name: 'Párna huzat', price: '10,990 Ft' }
-  ];
+  private collectionName = 'products';
 
-  constructor() { }
+  constructor(private firestore: Firestore) {}
 
-  getProducts(): Product[] {
-    return this.products;
+  async addProduct(product: Product): Promise<void> {
+    const productCollection = collection(this.firestore, this.collectionName);
+    await addDoc(productCollection, product);
+    console.log('Termék sikeresen hozzáadva:', product);
+  }
+
+  async getProducts(): Promise<Product[]> {
+    const productCollection = collection(this.firestore, this.collectionName);
+    const snapshot = await getDocs(productCollection);
+    return snapshot.docs.map(doc => ({
+      id: doc.id, 
+      ...doc.data()
+    } as Product));
+  }
+
+  async deleteProduct(productId: string): Promise<void> {
+    const productDoc = doc(this.firestore, this.collectionName, productId);
+    await deleteDoc(productDoc);
+    console.log('Termék sikeresen törölve:', productId);
   }
 }

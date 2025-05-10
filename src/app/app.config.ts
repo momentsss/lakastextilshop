@@ -2,6 +2,11 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAppCheck, initializeAppCheck, ReCaptchaEnterpriseProvider } from '@angular/fire/app-check';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth'; 
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export function appCheckFactory() {
   return initializeAppCheck(undefined, {
@@ -13,6 +18,9 @@ export function appCheckFactory() {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideAppCheck(appCheckFactory),
+    provideFirebaseApp(() => initializeApp(environment)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideAnimations(),
   ]
 };

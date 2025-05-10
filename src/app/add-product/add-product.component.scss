@@ -1,160 +1,278 @@
-$primary: #3e7bfa;
-$primary-dark: #2967e0;
-$text: #333;
-$border: #e0e6f5;
-$shadow: rgba(62, 123, 250, 0.15);
-$white: #fff;
+.add-product-form {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #3f51b5;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
 
-* {
-  box-sizing: border-box;
-}
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(63, 81, 181, 0.15);
+  }
 
-.container {
-  max-width: 580px;
-  margin: 0 auto;
-  padding: 15px;
-}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #3f51b5, #673ab7, #ff4081);
+    background-size: 300% 100%;
+    animation: gradientMove 3s ease infinite;
+  }
 
-.page-header {
-  text-align: center;
-  margin-bottom: 20px;
-
-  h2 {
-    font-size: 1.8rem;
-    color: $text;
-    font-weight: 600;
-    margin: 0 0 15px;
+  .form-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #3f51b5;
     position: relative;
-    display: inline-block;
-
-    &:after {
+    background: linear-gradient(90deg, #3f51b5, #5c6bc0, #7986cb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    &::after {
       content: '';
       position: absolute;
-      width: 50px;
-      height: 3px;
-      background-color: $primary;
-      bottom: -8px;
+      bottom: -12px;
       left: 50%;
       transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #3f51b5, #ff4081);
+      border-radius: 2px;
     }
   }
-}
 
-.add-product-form {
-  width: 100%;
-  padding: 25px;
-  background-color: $white;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px $shadow;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  .progress-bar {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
+    border-radius: 0 2px 2px 0;
+    transition: width 0.4s ease-in-out;
+  }
 
-  .form-group {
+  .form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem;
+
+    .animate-field {
+      width: 100%;
+      animation: fadeInUp 0.6s ease forwards;
+      transform: translateY(20px);
+      opacity: 0;
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+          animation-delay: $i * 0.15s;
+        }
+      }
+
+      ::ng-deep {
+        .mat-form-field-flex {
+          background-color: #f8f9fa;
+          border-radius: 8px;
+          transition: all 0.3s;
+          padding: 0.75rem 0.75rem 0;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        .mat-form-field-outline {
+          border-radius: 8px;
+        }
+        
+        .mat-form-field-label {
+          font-weight: 500;
+        }
+        
+        .mat-focused .mat-form-field-label {
+          color: #3f51b5;
+        }
+        
+        .mat-form-field-ripple {
+          background-color: #3f51b5;
+        }
+        
+        &.mat-focused .mat-form-field-flex {
+          background-color: rgba(63, 81, 181, 0.05);
+          box-shadow: 0 4px 15px rgba(63, 81, 181, 0.08);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  .button-container {
     display: flex;
-    flex-direction: column;
-
-    label {
-      font-weight: 500;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-    }
+    justify-content: center;
+    margin-top: 3rem;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
-  button {
-    width: 100%;
-    padding: 12px;
-    font-size: 0.95rem;
+  .action-button {
+    min-width: 180px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
     font-weight: 600;
-    background-color: $primary;
-    color: $white;
-    border-radius: 6px;
-    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border-radius: 50px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    transition: all 0.2s ease-in-out;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    mat-icon {
+      font-size: 1.5rem;
+    }
 
     &:hover {
-      background-color: $primary-dark;
-      transform: translateY(-1px);
-      box-shadow: 0 3px 8px rgba($primary, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     }
 
     &:disabled {
-      background-color: rgba($primary, 0.6);
+      background-color: #c5cae9;
+      color: #7986cb;
       cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
   }
-}
 
-mat-form-field {
-  width: 100%;
-
-  .mat-form-field-wrapper,
-  .mat-form-field-flex {
-    margin: 0;
-    padding: 0;
-  }
-
-  .mat-input-element {
-    color: $text !important;
-    caret-color: $primary;
-    font-size: 15px;
-  }
-
-  &.mat-focused .mat-form-field-label {
-    color: $primary;
-  }
-}
-
-input,
-textarea {
-  max-width: 100%;
-  overflow: hidden;
-}
-
-textarea {
-  min-height: 100px;
-  max-height: 200px;
-  resize: vertical;
-}
-
-.file-upload {
-  margin: 5px 0;
-
-  label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-
-  input[type='file'] {
-    width: 100%;
-    padding: 8px;
-    border: 1px dashed $border;
-    border-radius: 6px;
-    background-color: rgba($primary, 0.03);
-    transition: border-color 0.2s ease-in-out;
+  .add-button {
+    background: linear-gradient(45deg, #3f51b5, #5c6bc0);
+    color: white;
 
     &:hover {
-      border-color: rgba($primary, 0.5);
+      background: linear-gradient(45deg, #3949ab, #5c6bc0);
+    }
+    
+    &.pulse-effect {
+      animation: pulse 2s infinite;
+      
+      .button-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+        opacity: 0;
+        transform: scale(0.1);
+        animation: glow 2.5s infinite;
+      }
     }
   }
 
-  .image-preview {
-    max-width: 100%;
-    max-height: 150px;
-    object-fit: contain;
-    margin-top: 10px;
-    border-radius: 4px;
-    border: 1px solid $border;
+  .back-button {
+    background: linear-gradient(45deg, #ff4081, #f48fb1);
+    color: white;
+
+    &:hover {
+      background: linear-gradient(45deg, #f50057, #ff4081);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(30px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(63, 81, 181, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(63, 81, 181, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(63, 81, 181, 0); }
+  }
+  
+  @keyframes glow {
+    0% { opacity: 0; transform: scale(0.1); }
+    50% { opacity: 0.3; }
+    100% { opacity: 0; transform: scale(3); }
+  }
+
+  /* Nagyobb, részletesebb leírás formázása */
+  mat-form-field:nth-child(3) {
+    grid-column: span 2;
   }
 }
 
-@media (max-width: 600px) {
+// Reszponzív nézetek
+@media (max-width: 768px) {
   .add-product-form {
-    padding: 15px;
+    padding: 2rem;
+    margin: 2rem 1rem;
+    
+    .form-title {
+      font-size: 1.8rem;
+    }
+    
+    .form-fields {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    
+    .button-container {
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+    
+    .action-button {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .add-product-form {
+    padding: 1.5rem;
+    margin: 1rem;
+    
+    .form-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .button-container {
+      gap: 12px;
+    }
   }
 }

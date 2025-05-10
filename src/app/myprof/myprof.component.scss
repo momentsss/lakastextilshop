@@ -1,124 +1,261 @@
 .profile-container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 20px;
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 16px;
 }
 
 .profile-card {
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  background-color: #fff;
-}
-
-mat-card-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: #fafafa;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 20px;
-  position: relative;
-}
-
-mat-card-title {
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: #333;
-}
-
-mat-card-subtitle {
-  color: #666;
-}
-
-.edit-buttons {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.edit-buttons button {
-  transition: transform 0.3s ease, background-color 0.3s;
-}
-
-.edit-buttons button:hover {
-  transform: scale(1.1);
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-mat-form-field {
-  width: 100%;
-}
-
-mat-card-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-mat-slide-toggle {
-  margin-top: 20px;
-}
-
-.address-row {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-@media (min-width: 600px) {
-  .address-row {
-    flex-direction: row;
+  transition: all 0.3s ease;
+  background-color: white;
+  
+  &:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
   }
 }
 
-.zip-code, .city {
-  flex: 1;
+.profile-avatar {
+  background: linear-gradient(135deg, #4285f4, #34a853);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  mat-icon {
+    color: white;
+    font-size: 28px;
+    height: 28px;
+    width: 28px;
+  }
 }
 
-.full-width {
+mat-card-header {
+  padding: 20px;
+  background: linear-gradient(to right, #f8f9fa, #f1f3f5);
+  border-bottom: 1px solid #eaeaea;
+}
+
+mat-card-title {
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+  color: #2c3e50;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+mat-card-subtitle {
+  color: #546e7a;
+  font-size: 0.95rem;
+}
+
+mat-card-content {
+  padding: 28px 20px;
+}
+
+.profile-details {
+  margin-bottom: 24px;
+  
+  .profile-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 10px 12px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    border-left: 4px solid #4285f4;
+    
+    .profile-icon {
+      margin-right: 16px;
+      color: #4285f4;
+      font-size: 22px;
+      height: 22px;
+      width: 22px;
+    }
+    
+    span {
+      font-size: 16px;
+      
+      strong {
+        color: #37474f;
+        margin-right: 6px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.edit-button {
+  min-width: 160px;
+  padding: 8px 24px;
+  font-size: 16px;
+  border-radius: 28px;
+  box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
+  transition: all 0.2s ease;
+  background-color: #4285f4;
+  
+  &:hover {
+    box-shadow: 0 6px 12px rgba(66, 133, 244, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  mat-icon {
+    margin-right: 10px;
+  }
+}
+
+.edit-form {
+  padding: 12px 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+.form-field {
   width: 100%;
+  margin-bottom: 24px;
+  font-size: 16px;
+  
+  ::ng-deep .mat-form-field-outline {
+    border-radius: 8px;
+  }
+  
+  input {
+    padding: 4px 0;
+  }
 }
 
-.loading-message {
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #666;
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
 }
 
-mat-form-field.mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: #f5f5f5;
-  border-radius: 4px;
+.action-button {
+  min-width: 140px;
+  padding: 8px 20px;
+  font-size: 16px;
+  border-radius: 28px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  
+  mat-icon {
+    margin-right: 8px;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
-mat-form-field.mat-form-field-appearance-fill.mat-focused .mat-form-field-flex {
-  background-color: #e0f7fa;
-  border: 1px solid #26a69a;
+.save-button {
+  background-color: #4285f4;
+  box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
+  
+  &:hover {
+    box-shadow: 0 6px 12px rgba(66, 133, 244, 0.4);
+  }
 }
 
-.mat-select-value {
-  color: #333;
+.cancel-button {
+  border: 2px solid #ea4335;
+  color: #ea4335;
+  
+  &:hover {
+    background-color: rgba(234, 67, 53, 0.04);
+  }
 }
 
-.mat-select-arrow {
-  color: #757575;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.profile-details-list mat-list-item {
-  display: block;
-  padding: 10px 0;
+// Reszponzív stílusok
+@media (max-width: 599px) {
+  .profile-container {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+    
+    .action-button {
+      width: 100%;
+    }
+  }
+  
+  mat-card-title {
+    font-size: 1.4rem;
+  }
+  
+  .profile-details .profile-item {
+    padding: 8px 10px;
+  }
 }
 
-.country-item, .address-item {
-  flex-direction: column;
+.profile-container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.profile-card {
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background-color: white;
+}
+
+.profile-details {
+  margin-bottom: 24px;
+
+  .profile-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 10px 12px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    border-left: 4px solid #4285f4;
+
+    .profile-icon {
+      margin-right: 16px;
+      color: #4285f4;
+    }
+
+    span {
+      font-size: 16px;
+
+      strong {
+        color: #37474f;
+        margin-right: 6px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e0e0e0;
+  }
 }
