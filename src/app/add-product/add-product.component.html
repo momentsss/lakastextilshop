@@ -16,15 +16,13 @@
     <mat-form-field appearance="outline" class="animate-field">
       <mat-label>Termék ára</mat-label>
       <input matInput type="number" formControlName="price" placeholder="Add meg a termék árát">
-      <mat-icon matPrefix>monetization_on</mat-icon>
-      <span matSuffix>Ft</span>
+      <mat-icon matPrefix>monetization_on</mat-icon> <span matSuffix>Ft</span>
       <mat-error *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched">
         Az ár kötelező, és legalább 1 Ft-nak kell lennie.
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="animate-field">
-      <mat-label>Termék leírása</mat-label>
+    <mat-form-field appearance="outline" class="animate-field"> <mat-label>Termék leírása</mat-label>
       <textarea matInput formControlName="description" placeholder="Add meg a termék leírását"></textarea>
       <mat-icon matSuffix>description</mat-icon>
       <mat-hint align="end">{{productForm.get('description')?.value?.length || 0}}/500 karakter</mat-hint>
@@ -43,13 +41,11 @@
     </mat-form-field>
   </div>
 
-  <!-- Buttons -->
   <div class="button-container">
-    <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid" class="action-button add-button pulse-effect" aria-label="Termék hozzáadása">
-      <mat-icon>add_circle</mat-icon> Hozzáadás
-      <span class="button-glow"></span>
+    <button mat-raised-button type="submit" [disabled]="productForm.invalid" class="action-button add-button pulse-effect" aria-label="Termék hozzáadása">
+      <div class="button-glow"></div> <mat-icon>add_circle</mat-icon> Hozzáadás
     </button>
-    <button mat-raised-button color="accent" type="button" (click)="goBack()" class="action-button back-button" aria-label="Vissza a főoldalra">
+    <button mat-raised-button type="button" (click)="goBack()" class="action-button back-button" aria-label="Vissza a főoldalra">
       <mat-icon>arrow_back</mat-icon> Vissza
     </button>
   </div>
