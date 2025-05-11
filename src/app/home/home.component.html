@@ -27,7 +27,7 @@
             <dt>
               <mat-icon>crop_square</mat-icon> Méret:
             </dt>
-            <dd>{{ product.size }}</dd>
+            <dd>{{ product.size }} cm</dd>
           </div>
         </dl>
       </mat-card-content>
@@ -48,4 +48,8 @@
     <p>Nincs több termék.</p>
     <button mat-raised-button color="accent" (click)="navigateToAddProduct()">Új termék hozzáadása</button>
   </div>
+</section>
+
+<section class="floating-menu">
+  <app-menu (selectedPage)="changePage($event)"></app-menu>
 </section>

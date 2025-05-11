@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule]
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MenuComponent]
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
