@@ -14,11 +14,14 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MenuComponent]
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule]
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
   totalPrice: number = 0;
+lastVisibleProduct: Product | null = null;
+  pageSize: number = 5;
+  noMoreProducts: boolean = false;
 
   constructor(
     private router: Router,
@@ -27,15 +30,27 @@ export class HomeComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    try {
-      this.products = await this.productService.getProductsOrderedByPriceDesc();
+    await this.loadProducts();
+  }
 
-      this.cartService.cartItems$.subscribe((cartItems) => {
-        this.totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
-      });
+ async loadProducts(): Promise<void> {
+    try {
+      const newProducts = await this.productService.getPaginatedProducts(this.lastVisibleProduct, this.pageSize);
+
+      if (newProducts.length > 0) {
+        this.lastVisibleProduct = newProducts[newProducts.length - 1];
+        this.products = [...this.products, ...newProducts]; 
+      } else {
+        this.noMoreProducts = true; 
+      }
     } catch (error) {
       console.error('Hiba történt a termékek lekérdezése során:', error);
+      alert('Hiba történt a termékek betöltése során. Kérjük, próbálja újra.');
     }
+  }
+
+  async loadNextPage(): Promise<void> {
+    await this.loadProducts();
   }
 
   addToCart(product: Product): void {
@@ -51,5 +66,9 @@ export class HomeComponent implements OnInit {
 
   changePage(selectedPage: string): void {
     this.router.navigate([`/${selectedPage}`]);
+  }
+
+  navigateToAddProduct(): void {
+    this.router.navigate(['/add-product']);
   }
 }

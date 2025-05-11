@@ -1,24 +1,67 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, startAfter, limit, where } from '@angular/fire/firestore';
 import { Product } from '../model/product-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  
   private collectionName = 'products';
 
   constructor(private firestore: Firestore) {}
 
-  async getProductsOrderedByPriceDesc(): Promise<Product[]> {
-    const productCollection = collection(this.firestore, this.collectionName);
-    const q = query(productCollection, orderBy('price', 'desc'));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    } as Product));
+async getPaginatedProducts(lastVisibleProduct: Product | null, pageSize: number): Promise<Product[]> {
+  const productCollection = collection(this.firestore, this.collectionName);
+  let q;
+
+  if (lastVisibleProduct) {
+    q = query(
+      productCollection,
+      orderBy('price', 'desc'), 
+      startAfter(lastVisibleProduct.price), 
+      limit(pageSize) 
+    );
+  } else {
+    // Első oldal lekérdezése
+    q = query(
+      productCollection,
+      orderBy('price', 'desc'), 
+      limit(pageSize)
+    );
   }
+
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data(),
+  } as Product));
+}
+
+  async getProductsOrderedByPriceDesc(category?: string): Promise<Product[]> {
+  const productCollection = collection(this.firestore, this.collectionName);
+  let q;
+
+  if (category) {
+    q = query(
+      productCollection,
+      where('category', '==', category),
+      orderBy('price', 'desc')
+    );
+  } else {
+    q = query(
+      productCollection,
+      orderBy('price', 'desc')
+    );
+  }
+
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  } as Product));
+}
+
 
   async addProduct(product: Product): Promise<void> {
     const productCollection = collection(this.firestore, this.collectionName);
