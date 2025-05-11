@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     try {
-      this.products = await this.productService.getProducts();
+      this.products = await this.productService.getProductsOrderedByPriceDesc();
 
       this.cartService.cartItems$.subscribe((cartItems) => {
         this.totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);

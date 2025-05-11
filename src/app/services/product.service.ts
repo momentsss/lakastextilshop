@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, getDocs, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from '@angular/fire/firestore';
 import { Product } from '../model/product-model';
 
 @Injectable({
@@ -9,6 +9,16 @@ export class ProductService {
   private collectionName = 'products';
 
   constructor(private firestore: Firestore) {}
+
+  async getProductsOrderedByPriceDesc(): Promise<Product[]> {
+    const productCollection = collection(this.firestore, this.collectionName);
+    const q = query(productCollection, orderBy('price', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    } as Product));
+  }
 
   async addProduct(product: Product): Promise<void> {
     const productCollection = collection(this.firestore, this.collectionName);
@@ -30,4 +40,6 @@ export class ProductService {
     await deleteDoc(productDoc);
     console.log('Termék sikeresen törölve:', productId);
   }
+
+  
 }
