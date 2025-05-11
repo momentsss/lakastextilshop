@@ -219,11 +219,12 @@ import { CommonModule } from '@angular/common';
       animation-delay: 9s;
     }
     
+    
     .main-header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center; 
       align-items: center;
-      padding: 1.5rem 4rem;
+      padding: 1rem;
       position: relative;
       z-index: 10;
     }
@@ -231,24 +232,24 @@ import { CommonModule } from '@angular/common';
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
     
     .logo-icon {
-      font-size: 2rem;
+      font-size: 1.5rem;
       background: linear-gradient(135deg, #6A5ACD, #9370DB);
       color: white;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 15px rgba(106, 90, 205, 0.3);
+      box-shadow: 0 4px 10px rgba(106, 90, 205, 0.3);
     }
     
     .logo-text {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: #4A3882;
       letter-spacing: 0.5px;
@@ -257,25 +258,27 @@ import { CommonModule } from '@angular/common';
     .main-content {
       position: relative;
       z-index: 5;
-      padding: 0 4rem;
+      padding: 0 1rem;
     }
     
     .hero-section {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 2rem;
-      min-height: calc(100vh - 200px);
+      text-align: center;
+      gap: 1.5rem;
+      min-height: calc(100vh - 150px);
+      padding-top: 1rem;
     }
     
     .hero-content {
-      flex: 1;
-      max-width: 650px;
+      width: 100%;
     }
     
     .main-title {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
       color: #4A3882;
       font-weight: 800;
     }
@@ -287,29 +290,33 @@ import { CommonModule } from '@angular/common';
     }
     
     .subtitle {
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: #555;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
     }
     
     .hero-features {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
+      flex-direction: column; 
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
     }
     
     .feature {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      justify-content: center;
+      gap: 0.5rem;
       background: rgba(255, 255, 255, 0.7);
-      padding: 0.75rem 1.25rem;
+      padding: 0.75rem 1rem;
       border-radius: 50px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       backdrop-filter: blur(10px);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 300px;
     }
     
     .feature:hover {
@@ -318,23 +325,26 @@ import { CommonModule } from '@angular/common';
     }
     
     .feature-icon {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
     }
     
     .feature-text {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: #4A3882;
     }
     
     .buttons {
       display: flex;
-      gap: 1rem;
+      flex-direction: column; 
+      gap: 0.75rem;
+      width: 100%;
+      align-items: center;
     }
     
     button {
-      font-size: 1rem;
-      padding: 0.875rem 1.75rem;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 50px;
       transition: all 0.3s ease;
       font-weight: 600;
@@ -343,6 +353,8 @@ import { CommonModule } from '@angular/common';
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      width: 100%;
+      max-width: 300px;
     }
     
     .btn-icon {
@@ -379,9 +391,9 @@ import { CommonModule } from '@angular/common';
     }
     
     .hero-image {
-      flex: 1;
-      position: relative;
-      height: 500px;
+      width: 100%;
+      height: 250px; 
+      margin-top: 1rem;
     }
     
     .image-container {
@@ -396,61 +408,61 @@ import { CommonModule } from '@angular/common';
       background-color: #fff;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      transform: scale(0.7);
     }
     
     .p1 {
-      width: 220px;
-      height: 280px;
-      left: 10%;
+      width: 180px;
+      height: 220px;
+      left: 5%;
       top: 20%;
       background: linear-gradient(to bottom, #f8f8f8, #e0e0e0);
       animation: float-product 8s infinite ease-in-out;
       z-index: 3;
-      transform: rotate(-5deg);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+      transform: rotate(-5deg) scale(0.7);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
     
     .p2 {
-      width: 190px;
-      height: 250px;
-      left: 25%;
+      width: 160px;
+      height: 200px;
+      left: 30%;
       top: 5%;
       background: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
       animation: float-product 8s infinite ease-in-out 2s;
       z-index: 2;
-      transform: rotate(8deg);
+      transform: rotate(8deg) scale(0.7);
     }
     
     .p3 {
-      width: 240px;
-      height: 300px;
-      left: 40%;
-      top: 30%;
+      width: 180px;
+      height: 230px;
+      left: 50%;
+      top: 25%;
       background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
       animation: float-product 8s infinite ease-in-out 4s;
       z-index: 1;
-      transform: rotate(-2deg);
+      transform: rotate(-2deg) scale(0.7);
     }
     
     @keyframes float-product {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(3deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
+      0% { transform: translateY(0px) rotate(0deg) scale(0.7); }
+      50% { transform: translateY(-15px) rotate(3deg) scale(0.7); }
+      100% { transform: translateY(0px) rotate(0deg) scale(0.7); }
     }
     
     .categories-preview {
-      display: flex;
-      justify-content: space-between;
-      margin: 2rem 0 4rem;
-      gap: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 0.75rem;
+      margin: 1.5rem 0 3rem;
     }
     
     .category-item {
-      flex: 1;
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(10px);
       border-radius: 16px;
-      padding: 1.5rem;
+      padding: 1rem;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -464,102 +476,191 @@ import { CommonModule } from '@angular/common';
     }
     
     .category-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
     
     .category-name {
       font-weight: 600;
       color: #4A3882;
+      font-size: 0.9rem;
     }
     
-    @media (max-width: 1200px) {
-      .main-title {
-        font-size: 3rem;
-      }
-      
-      .hero-section {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 2rem;
-      }
-      
-      .hero-features {
-        justify-content: center;
-      }
-      
-      .buttons {
-        justify-content: center;
-      }
-      
-      .hero-image {
-        height: 400px;
-      }
-    }
-    
-    @media (max-width: 900px) {
+    @media (min-width: 600px) {
       .main-header {
         padding: 1.25rem 2rem;
+        justify-content: space-between;
       }
       
       .main-content {
         padding: 0 2rem;
       }
       
-      .categories-preview {
-        flex-wrap: wrap;
-      }
-      
-      .category-item {
-        flex-basis: calc(50% - 0.75rem);
-        margin-bottom: 1.5rem;
-      }
-    }
-    
-    @media (max-width: 768px) {
       .main-title {
         font-size: 2.5rem;
       }
       
-      .hero-features {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .feature {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .main-header {
-        padding: 1rem;
-      }
-      
-      .main-content {
-        padding: 0 1rem;
-      }
-      
-      .main-title {
-        font-size: 2rem;
-      }
-      
       .subtitle {
-        font-size: 1rem;
+        font-size: 1.1rem;
+      }
+      
+      .hero-features {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
       }
       
       .buttons {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        justify-content: center;
       }
       
-      .category-item {
-        flex-basis: 100%;
+      button {
+        width: auto;
       }
       
       .hero-image {
         height: 300px;
+      }
+      
+      .floating-product {
+        transform: scale(0.8);
+      }
+      
+      .p1 {
+        transform: rotate(-5deg) scale(0.8);
+      }
+      
+      .p2 {
+        transform: rotate(8deg) scale(0.8);
+      }
+      
+      .p3 {
+        transform: rotate(-2deg) scale(0.8);
+      }
+      
+      @keyframes float-product {
+        0% { transform: translateY(0px) rotate(0deg) scale(0.8); }
+        50% { transform: translateY(-15px) rotate(3deg) scale(0.8); }
+        100% { transform: translateY(0px) rotate(0deg) scale(0.8); }
+      }
+    }
+    
+    /* Desktop styles */
+    @media (min-width: 900px) {
+      .main-header {
+        padding: 1.5rem 4rem;
+      }
+      
+      .main-content {
+        padding: 0 4rem;
+      }
+      
+      .hero-section {
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+        min-height: calc(100vh - 200px);
+      }
+      
+      .hero-content {
+        flex: 1;
+        max-width: 650px;
+      }
+      
+      .main-title {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+      
+      .hero-features {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+      
+      .feature {
+        width: auto;
+      }
+      
+      .buttons {
+        justify-content: flex-start;
+      }
+      
+      .hero-image {
+        flex: 1;
+        height: 500px;
+      }
+      
+      .floating-product {
+        transform: scale(1);
+      }
+      
+      .p1 {
+        width: 220px;
+        height: 280px;
+        left: 10%;
+        top: 20%;
+        transform: rotate(-5deg);
+      }
+      
+      .p2 {
+        width: 190px;
+        height: 250px;
+        left: 25%;
+        top: 5%;
+        transform: rotate(8deg);
+      }
+      
+      .p3 {
+        width: 240px;
+        height: 300px;
+        left: 40%;
+        top: 30%;
+        transform: rotate(-2deg);
+      }
+      
+      @keyframes float-product {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(3deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
+      }
+      
+      .categories-preview {
+        display: flex;
+        grid-template-columns: none;
+        justify-content: space-between;
+        margin: 2rem 0 4rem;
+        gap: 1.5rem;
+      }
+      
+      .category-item {
+        flex: 1;
+        padding: 1.5rem;
+      }
+      
+      .category-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .category-name {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .main-title {
+        font-size: 3.5rem;
       }
     }
   `]
