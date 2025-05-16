@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   products: Product[] = [];
   totalPrice: number = 0;
 lastVisibleProduct: Product | null = null;
-  pageSize: number = 5;
+  pageSize: number = 3;
   noMoreProducts: boolean = false;
 
   constructor(

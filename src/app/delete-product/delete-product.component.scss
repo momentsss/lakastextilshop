@@ -1,81 +1,126 @@
-$primary-color: #6366f1;
-$secondary-color: #4f46e5;
-$accent-color: #ec4899;
-$danger-color: #ef4444;
-$text-color: #1f2937;
-$light-text: #9ca3af;
-$background-color: #f9fafb;
-$card-bg: #ffffff;
-$shadow-color: rgba(0, 0, 0, 0.1);
+$primary-color: #3f51b5;
+$primary-dark: #303f9f;
+$warn-color: #f44336;
+$warn-hover: #d32f2f;
+$light-gray: #f5f5f5;
+$medium-gray: #e0e0e0;
+$dark-gray: #666;
+$text-color: #333;
+$card-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+$hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+$border-radius: 8px;
+$spacing-unit: 16px;
+$transition-speed: 0.3s;
 
-$font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+// Mixinek a reszponzivitáshoz
+@mixin for-tablet-up {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
 
+@mixin for-desktop-up {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Animációk
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
+  0% {
+    box-shadow: 0 0 0 0 rgba($warn-color, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba($warn-color, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($warn-color, 0);
+  }
 }
 
-@keyframes slideIn {
-  from { transform: translateX(-20px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
 }
 
+// Alap stílusok
 .delete-container {
-  font-family: $font-family;
+  padding: $spacing-unit;
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: linear-gradient(135deg, rgba($background-color, 0.98), $background-color);
-  
+  margin: 0 auto;
+  background-color: $light-gray;
+  min-height: 100vh;
+
   h2 {
+    text-align: center;
+    margin-bottom: $spacing-unit * 1.5;
+    color: $text-color;
     font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: $primary-color;
+    font-weight: 500;
     position: relative;
-    display: inline-block;
+    padding-bottom: $spacing-unit;
     
     &::after {
       content: '';
       position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 60%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
       height: 3px;
-      background: linear-gradient(to right, $primary-color, $accent-color);
+      background: linear-gradient(90deg, $primary-color, lighten($primary-color, 20%));
       border-radius: 3px;
     }
   }
 }
 
+// Termék lista
 .product-list {
-  display: flex;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-unit;
 
+  @include for-tablet-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include for-desktop-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
+// Termék kártya
 .product-card-container {
-  background: $card-bg;
-  border-radius: 12px;
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba($shadow-color, 0.15);
-  transition: all 0.3s ease;
-  position: relative;
-  animation: fadeIn 0.5s ease-out forwards;
-  animation-fill-mode: both;
+  transition: transform $transition-speed, box-shadow $transition-speed;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  animation: fadeIn 0.5s ease-out forwards;
+  animation-fill-mode: both;
   
-  @for $i from 1 through 10 {
+  @for $i from 1 through 20 {
     &:nth-child(#{$i}) {
       animation-delay: #{$i * 0.08}s;
     }
@@ -83,241 +128,182 @@ $font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba($shadow-color, 0.25);
-    
+    box-shadow: $hover-shadow;
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(to right, $primary-color, $accent-color);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-  }
-}
+  // Kártya fejléc
+  mat-card-header {
+    padding: $spacing-unit;
+    background: linear-gradient(135deg, $primary-color 0%, lighten($primary-color, 10%) 100%);
+    color: white;
 
-mat-card-header {
-  padding: 1.25rem 1.25rem 0.5rem;
-  
-  .product-name {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    
-    .label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: $light-text;
-      letter-spacing: 1px;
-      margin-bottom: 0.3rem;
-    }
-    
-    .product-name-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: $text-color;
-      transition: color 0.2s;
-      word-break: break-word;
-      line-height: 1.4;
-    }
-  }
-}
-
-mat-card-content {
-  padding: 0.5rem 1.25rem 1.25rem;
-  flex: 1;
-  
-  .product-specs {
-    margin: 0;
-    
-    .spec-row {
+    .product-name {
+      width: 100%;
       display: flex;
-      margin-bottom: 0.8rem;
-      animation: slideIn 0.3s ease-out forwards;
-      animation-fill-mode: both;
-      
-      @for $i from 1 through 3 {
-        &:nth-child(#{$i}) {
-          animation-delay: #{0.2 + $i * 0.08}s;
-        }
+      flex-direction: column;
+
+      .label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.8;
+        margin-bottom: 4px;
       }
-      
-      dt {
-        flex: 0 0 30%;
-        font-weight: 600;
-        color: $primary-color;
-        position: relative;
-        
-        &::after {
-          content: ':';
-          position: absolute;
-          right: 0.5rem;
-        }
-      }
-      
-      dd {
-        flex: 1;
-        margin: 0;
-        color: $text-color;
-        padding-left: 0.5rem;
-        word-break: break-word;
+
+      .product-name-text {
+        font-size: 1.3rem;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
-}
 
-mat-card-actions {
-  padding: 0.75rem 1.25rem;
-  display: flex;
-  justify-content: flex-end;
-  background-color: rgba($background-color, 0.5);
-  margin-top: auto;
-  
-  .cta-button {
-    background: linear-gradient(to right, $danger-color, rgba($danger-color, 0.9));
-    border-radius: 8px;
-    padding: 0.4rem 1rem;
+  // Kártya tartalom
+  mat-card-content {
+    padding: $spacing-unit;
+    flex-grow: 1;
     display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 4px 10px rgba($danger-color, 0.2);
-    
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba($danger-color, 0.3);
-      background: linear-gradient(to right,adjust-color($danger-color, $lightness: 5%), $danger-color);    }
-    
-    &:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 6px rgba($danger-color, 0.2);
-    }
-    
-    mat-icon {
-      transition: transform 0.3s ease;
-      font-size: 18px;
-      height: 18px;
-      width: 18px;
-      line-height: 18px;
-    }
-    
-    &:hover mat-icon {
-      transform: rotate(12deg);
-    }
-  }
-}
-
-.no-products-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: $light-text;
-  
-  padding: 2rem 1rem;
-  margin: 3rem auto;
-  width: 90%;
-  max-width: 400px;
-
-  background-color: rgba($background-color, 0.7);
-  border-radius: 16px;
-  border: 2px dashed rgba($light-text, 0.4);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-  animation: pulse 2s infinite ease-in-out;
-}
-
-@media (max-width: 768px) {
-  .product-list {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
-  }
-  
-  .delete-container {
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .product-list {
-    grid-template-columns: 1fr;
-  }
-  
-  .spec-row {
     flex-direction: column;
-    
-    dt {
-      margin-bottom: 0.3rem;
-      
-      &::after {
-        display: none;
+
+    .product-specs {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-unit * 0.75;
+
+      .spec-row {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 8px;
+        align-items: baseline;
+        
+        dt {
+          font-weight: 500;
+          color: $dark-gray;
+          font-size: 0.9rem;
+        }
+        
+        dd {
+          color: $text-color;
+          margin: 0;
+          font-size: 1rem;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+        }
       }
     }
+  }
+
+  // Kártya gombok
+  mat-card-actions {
+    padding: $spacing-unit;
+    background-color: rgba($light-gray, 0.6);
+    border-top: 1px solid $medium-gray;
     
-    dd {
-      padding-left: 0;
+    .cta-button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color $transition-speed, transform $transition-speed;
+      
+      mat-icon {
+        transition: transform $transition-speed;
+      }
+      
+      &:hover {
+        background-color: $warn-hover;
+        transform: scale(1.05);
+        
+        mat-icon {
+          transform: rotate(10deg);
+        }
+      }
+      
+      &:active {
+        transform: scale(0.95);
+      }
+      
+      &:focus {
+        animation: pulse 1.8s infinite;
+      }
     }
   }
+}
+
+// "Nincsenek termékek" üzenet
+.no-products-message {
+  text-align: center;
+  padding: $spacing-unit * 2.5;
+  color: $dark-gray;
+  font-size: 1.2rem;
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+  animation: fadeIn 0.5s ease-out;
+  margin: $spacing-unit auto;
+  max-width: 600px;
   
-  .delete-container h2 {
-    font-size: 1.5rem;
+  &::before {
+    content: '😞';
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: $spacing-unit;
   }
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba($background-color, 0.5);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, $primary-color, $accent-color);
-  border-radius: 10px;
-  
-  &:hover {
-    background: linear-gradient(to bottom, darken($primary-color, 10%), darken($accent-color, 10%));    }
-}
+// Rögzített vissza gomb
 .fixed-back-button-container {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: $spacing-unit * 1.5;
+  right: $spacing-unit * 1.5;
   z-index: 999;
   
   .fixed-back-button {
-    background-color: #3f51b5;
-    color: white;
-    font-weight: 600;
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
     border-radius: 30px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    white-space: nowrap;
-
-    &:hover {
-      background-color: #303f9f;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      transform: translateY(-3px);
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: background-color $transition-speed, transform $transition-speed, box-shadow $transition-speed;
+    
+    &::before {
+      content: '←';
+      margin-right: 8px;
+      font-size: 1.2rem;
+      transition: transform $transition-speed;
     }
-
+    
+    &:hover {
+      background-color: $primary-dark;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+      
+      &::before {
+        transform: translateX(-4px);
+      }
+    }
+    
     &:active {
-      transform: scale(0.97);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(0);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:focus {
+      animation: bounce 2s infinite;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    bottom: $spacing-unit;
+    right: $spacing-unit;
+    
+    .fixed-back-button {
+      padding: 10px 16px;
+      font-size: 0.9rem;
     }
   }
 }

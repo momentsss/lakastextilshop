@@ -1,55 +1,57 @@
 <section class="home-container">
   <h2>Termékeink</h2>
+  
   <div class="product-list">
-    <mat-card *ngFor="let product of products" class="product-card-container">
-      <mat-card-header>
-        <mat-card-title class="product-name">
-          <span class="label">Termék neve:</span>
-          <span class="product-name-text">{{ product.name }}</span>
-        </mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content>
-        <dl class="product-specs">
-          <div class="spec-row">
-            <dt>
-              <mat-icon>attach_money</mat-icon> Ár:
-            </dt>
-            <dd>{{ product.price | number }} Ft</dd>
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-header">
+        <h3 class="product-title">{{ product.name }}</h3>
+      </div>
+      
+      <div class="product-content">
+        <div class="product-spec">
+          <div class="spec-icon">💰</div>
+          <div class="spec-info">
+            <div class="spec-label">Ár</div>
+            <div class="spec-value">{{ product.price | number }} Ft</div>
           </div>
-          <div class="spec-row">
-            <dt>
-              <mat-icon>description</mat-icon> Leírás:
-            </dt>
-            <dd>{{ product.description }}</dd>
+        </div>
+        
+        <div class="product-spec">
+          <div class="spec-icon">📝</div>
+          <div class="spec-info">
+            <div class="spec-label">Leírás</div>
+            <div class="spec-value">{{ product.description }}</div>
           </div>
-          <div class="spec-row" *ngIf="product.size">
-            <dt>
-              <mat-icon>crop_square</mat-icon> Méret:
-            </dt>
-            <dd>{{ product.size }} cm</dd>
+        </div>
+        
+        <div class="product-spec">
+          <div class="spec-icon">📐</div>
+          <div class="spec-info">
+            <div class="spec-label">Méret</div>
+            <div class="spec-value">{{ product.size ? (product.size + ' cm') : 'Nem elérhető' }}</div>
           </div>
-        </dl>
-      </mat-card-content>
-
-      <mat-card-actions>
-        <button mat-raised-button color="primary" class="cta-button" (click)="addToCart(product)">
-          <mat-icon>shopping_cart</mat-icon> Kosárba
+        </div>
+      </div>
+      
+      <div class="product-action">
+        <button class="cart-button" (click)="addToCart(product)">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-text">Kosárba</span>
         </button>
-      </mat-card-actions>
-    </mat-card>
+      </div>
+    </div>
   </div>
 
   <div class="pagination" *ngIf="!noMoreProducts">
-    <button mat-raised-button color="primary" (click)="loadNextPage()">További termékek</button>
+    <button class="load-more" (click)="loadNextPage()">További termékek</button>
   </div>
 
   <div class="no-more-products" *ngIf="noMoreProducts">
     <p>Nincs több termék.</p>
-    <button mat-raised-button color="accent" (click)="navigateToAddProduct()">Új termék hozzáadása</button>
+    <button class="add-product" (click)="navigateToAddProduct()">Új termék hozzáadása</button>
   </div>
 </section>
 
-<section class="floating-menu">
+<div class="floating-menu">
   <app-menu (selectedPage)="changePage($event)"></app-menu>
-</section>
+</div>
